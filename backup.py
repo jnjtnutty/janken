@@ -100,21 +100,39 @@ while True:
         if max_area1 < 3000:
             cv2.putText(frame, 'input hand', (x1, y1), cv2.FONT_HERSHEY_SIMPLEX, 1.0, (255, 0, 0),
                         lineType=cv2.LINE_AA)
-            ans1 = 'None'
-        else:
+            ans1 = 0
+        elif dic[str(ans_player1)] == 'scissor':
             cv2.putText(frame, dic[str(ans_player1)], (x1, y1), cv2.FONT_HERSHEY_SIMPLEX, 1.0, (255, 0, 0),
                         lineType=cv2.LINE_AA)
-            ans1 = dic[str(ans_player1)]
+            ans1 = 'scissor'
+        else:
+            if max_area1 > 12000:
+                cv2.putText(frame, dic[str(ans_player1)], (x1, y1), cv2.FONT_HERSHEY_SIMPLEX, 1.0, (255, 0, 0),
+                            lineType=cv2.LINE_AA)
+                ans1 = 'paper'
+            else:
+                cv2.putText(frame, 'rock', (x1, y1), cv2.FONT_HERSHEY_SIMPLEX, 1.0, (255, 0, 0),
+                            lineType=cv2.LINE_AA)
+                ans1 = 'rock'
+
 
         if max_area2 < 3000:
             cv2.putText(frame, 'input hand', (x2, y2), cv2.FONT_HERSHEY_SIMPLEX, 1.0, (255, 0, 0),
                         lineType=cv2.LINE_AA)
             ans2 = 'None'
-        else:
+        elif dic[str(ans_player2)] == 'scissor':
             cv2.putText(frame, dic[str(ans_player2)], (x2, y2), cv2.FONT_HERSHEY_SIMPLEX, 1.0, (255, 0, 0),
                         lineType=cv2.LINE_AA)
-            ans2  = dic[str(ans_player2)]
-
+            ans2 = 'scissor'
+        else:
+            if max_area2 > 12000:
+                cv2.putText(frame, dic[str(ans_player2)], (x2, y2), cv2.FONT_HERSHEY_SIMPLEX, 1.0, (255, 0, 0),
+                            lineType=cv2.LINE_AA)
+                ans2 = 'paper'
+            else:
+                cv2.putText(frame, 'rock', (x2, y2), cv2.FONT_HERSHEY_SIMPLEX, 1.0, (255, 0, 0),
+                            lineType=cv2.LINE_AA)
+                ans2 = 'rock'
 
         if ans1 == ans2:
             play1 = 'deal'
@@ -138,10 +156,22 @@ while True:
             play1 = 'win'
             play2 = 'lose'
 
+        # if ans1 == 'None' and ans2 == 'None':
+        #     cv2.putText(frame, 'None', (x1 + w1, y1), cv2.FONT_HERSHEY_SIMPLEX, 1.0, (0, 0, 255),
+        #                 lineType=cv2.LINE_AA)
+        #     cv2.putText(frame, 'None', (x2-10, y2), cv2.FONT_HERSHEY_SIMPLEX, 1.0, (0, 0, 255),
+        #                 lineType=cv2.LINE_AA)
+        # else:
+        #     cv2.putText(frame, play1, (x1 + w1 + 10, y1), cv2.FONT_HERSHEY_SIMPLEX, 1.0, (0, 0, 255),
+        #                 lineType=cv2.LINE_AA)
+        #     cv2.putText(frame, play2, (x2 - 70, y2), cv2.FONT_HERSHEY_SIMPLEX, 1.0, (0, 0, 255),
+        #                 lineType=cv2.LINE_AA)
 
+        # print('ans'+str(ans_player1))
         cv2.imshow('frame', frame)
         cv2.imshow('skin',skin)
         if cv2.waitKey(1) & 0xFF == ord('q'):
+            # cv2.imwrite('drawcontour1.jpg',pic_player1)
             break
 
     except:
